@@ -1,5 +1,5 @@
 <?php
-    declare(strict_types=1);
+    declare(strict_types = 1);
 
     use App\User;
     use Illuminate\Database\Seeder;
@@ -14,12 +14,13 @@
         public function run()
         {
             if (User::count() === 0) {
-                User::create([
-                    'id'       => 1,
-                    'name'     => 'user',
-                    'email'    => 'user@users.com',
-                    'password' => bcrypt('user'),
-                ]);
+                for ($i = 0; $i < 10; ++$i) {
+                    User::create([
+                        'name'     => "user{$i}",
+                        'email'    => "user{$i}@users.com",
+                        'password' => bcrypt("user{$i}"),
+                    ]);
+                }
             }
         }
     }

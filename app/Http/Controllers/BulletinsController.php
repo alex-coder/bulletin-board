@@ -6,6 +6,7 @@
 
     use App\Bulletin;
     use Carbon\Carbon;
+    use Illuminate\Support\Facades\Auth;
 
     class BulletinsController extends Controller
     {
@@ -14,13 +15,14 @@
         public function index()
         {
             return view('bulletins.index', [
-                'list' => Bulletin::paginate(static::BULLETINS_PER_PAGE),
+                'list' => Bulletin::active()->paginate(static::BULLETINS_PER_PAGE),
             ]);
         }
 
         public function show(int $id)
         {
             return view('bulletins.show', [
+                'user' => Auth::user(),
                 'item' => Bulletin::find($id),
                 'now'  => Carbon::now(),
             ]);

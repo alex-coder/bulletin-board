@@ -2,11 +2,11 @@
 
     declare(strict_types = 1);
 
-    use App\Bulletin;
-    use Illuminate\Database\Migrations\Migration;
+    use App\Offer;
     use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Database\Migrations\Migration;
 
-    class CreateBulletinTable extends Migration
+    class CreateOffers extends Migration
     {
         /**
          * Run the migrations.
@@ -15,16 +15,16 @@
          */
         public function up()
         {
-            Schema::create('bulletins', function (Blueprint $table) {
+            Schema::create('offers', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title');
                 $table->text('description');
-                $table->text('image');
                 $table->decimal('cost')->unsigned();
-                $table->integer('status')->default(Bulletin::STATUS_ACTIVE);
+                $table->integer('status')->default(Offer::STATUS_ACTIVE);
                 $table->timestamps();
 
                 $table->integer('user_id')->unsigned();
+                $table->integer('bulletin_id')->unsigned();
             });
         }
 
@@ -35,6 +35,6 @@
          */
         public function down()
         {
-            Schema::drop('bulletins');
+            Schema::drop('offers');
         }
     }

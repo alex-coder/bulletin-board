@@ -1,4 +1,5 @@
 <?php
+    declare(strict_types = 1);
 
     use Illuminate\Database\Seeder;
 
@@ -13,5 +14,6 @@
         {
             $this->call(UsersSeeder::class);
             $this->call(BulletinsSeeder::class);
+            $this->call(OffersSeeder::class);
         }
     }
