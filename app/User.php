@@ -1,4 +1,5 @@
 <?php
+    declare(strict_types = 1);
 
     namespace App;
 
@@ -10,6 +11,10 @@
      * @package App
      *
      * @property Offer[] $offers
+     * @property int     $id
+     * @property string  $name
+     * @property string  $email
+     * @property string  $password
      */
     class User extends Authenticatable
     {

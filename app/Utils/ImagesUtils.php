@@ -10,10 +10,10 @@
 
         public static function uploadPath() : string
         {
-            return public_path() . '/' . static::UPLOAD_DIR;
+            return public_path(static::UPLOAD_DIR);
         }
 
-        public static function buildUrl($filename) : string
+        public static function buildUrl(string $filename) : string
         {
             return config('app.url') . '/' . static::UPLOAD_DIR . '/' . $filename;
         }

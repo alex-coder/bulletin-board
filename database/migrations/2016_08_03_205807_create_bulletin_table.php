@@ -2,7 +2,7 @@
 
     declare(strict_types = 1);
 
-    use App\Bulletin;
+    use App\Constants\BulletinsConstants;
     use Illuminate\Database\Migrations\Migration;
     use Illuminate\Database\Schema\Blueprint;
 
@@ -21,7 +21,7 @@
                 $table->text('description');
                 $table->text('image');
                 $table->decimal('cost')->unsigned();
-                $table->integer('status')->default(Bulletin::STATUS_ACTIVE);
+                $table->integer('status')->default(BulletinsConstants::STATUS_ACTIVE);
                 $table->timestamps();
 
                 $table->integer('user_id')->unsigned();

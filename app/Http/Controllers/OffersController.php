@@ -4,12 +4,12 @@
 
     namespace App\Http\Controllers;
 
-    use App\Bulletin;
+    use App\Constants\BulletinsConstants;
+    use App\Constants\OffersConstants;
     use App\Http\Requests\StoreOfferRequest;
     use App\Offer;
     use App\User;
     use Illuminate\Support\Facades\Auth;
-    use Validator;
 
     class OffersController extends Controller
     {
@@ -46,12 +46,14 @@
             $user     = Auth::user();
 
             if ($bulletin->user_id === $user->id) {
-                $bulletin->status = Bulletin::STATUS_CLOSED;
+                $bulletin->status = BulletinsConstants::STATUS_CLOSED;
                 $bulletin->save();
 
-                $bulletin->offers()->where('id', '!=', $offer_id)->update(['status' => Offer::STATUS_CANCELED]);
+                $bulletin->offers()
+                         ->where('id', '!=', $offer_id)
+                         ->update(['status' => OffersConstants::STATUS_CANCELED]);
 
-                $offer->status = Offer::STATUS_APPLIED;
+                $offer->status = OffersConstants::STATUS_APPLIED;
                 $offer->save();
             }
 

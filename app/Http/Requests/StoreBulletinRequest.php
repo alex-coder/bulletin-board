@@ -1,6 +1,9 @@
 <?php
+    declare(strict_types = 1);
 
     namespace App\Http\Requests;
+
+    use App\Constants\BulletinsConstants;
 
     class StoreBulletinRequest extends Request
     {
@@ -21,12 +24,6 @@
          */
         public function rules()
         {
-            return [
-                'title'       => 'required|filled|max:255',
-                'description' => 'required|filled',
-                'cost'        => 'required|filled|numeric|min:0',
-                'image'       => 'image|max:3145728', // 3mb
-                'image_url'   => 'url',
-            ];
+            return BulletinsConstants::$validationRules;
         }
     }

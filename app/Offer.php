@@ -1,7 +1,10 @@
 <?php
 
+    declare(strict_types = 1);
+
     namespace App;
 
+    use App\Constants\OffersConstants;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,13 +14,16 @@
      *
      * @property User     $user
      * @property Bulletin $bulletin
+     * @property int      $id
+     * @property string   $title
+     * @property string   $description
+     * @property float    $cost
+     * @property int      $status
+     * @property int      $user_id
+     * @property int      $bulletin_id
      */
     class Offer extends Model
     {
-        const STATUS_APPLIED  = 2;
-        const STATUS_ACTIVE   = 1;
-        const STATUS_CANCELED = 0;
-
         public function user() : BelongsTo
         {
             return $this->belongsTo(User::class);
@@ -30,6 +36,6 @@
 
         public function isApplied() : bool
         {
-            return $this->status === static::STATUS_APPLIED;
+            return $this->status === OffersConstants::STATUS_APPLIED;
         }
     }
