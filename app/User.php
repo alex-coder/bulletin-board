@@ -38,4 +38,9 @@
         {
             return $this->hasMany(Bulletin::class);
         }
+
+        public function offers() : HasMany
+        {
+            return $this->hasMany(Offer::class);
+        }
     }

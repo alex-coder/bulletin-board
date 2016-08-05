@@ -4,7 +4,7 @@
     @if (!$item)
         <h2>Sorry, bulletin not found</h2>
     @else
-        <h1>{{ $item->title }}</h1>
+        <h1 class="page-header">{{ $item->title }}</h1>
         <div class="row">
             <div class="col-md-4">
                 <img src="{{ $item->getImageUrl() }}" alt="{{ $item->title }}" class="img-responsive">
@@ -16,42 +16,16 @@
                     {{ $item->description }}
                 </p>
                 @unless ($item->isActive())
-                    <div class="text-danger">
-                        Bulletin is closed
-                    </div>
+                    <div class="text-danger">Bulletin is closed</div>
                 @endunless
 
                 <hr>
                 @if ($item->user->id !== $user->id)
                     @if ($item->isOfferCreated($user))
-                        <h3>Your offer has been sent</h3>
+                        <h3>Your offer:</h3>
+                        @include('shared.offer_list_item', ['offer' => $item->offerByUser($user)])
                     @else
-                        <h3>Create offer</h3>
-                        <form action="{{ route('bulletins.offers.store', $item) }}" method="post">
-                            {!! csrf_field() !!}
-                            <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                                <label class="control-label" for="title">Title</label>
-                                <input id="title" type="text" name="title" class="form-control" placeholder="Title" value="{{ old('title') }}">
-                                @if ($errors->has('title'))
-                                    <div class="help-block">{{ $errors->first('title') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                                <label class="control-label" for="description">Description</label>
-                                <textarea id="description" name="description" class="form-control" placeholder="Description" style="resize: none; height: 150px;">{{ old('description') }}</textarea>
-                                @if ($errors->has('description'))
-                                    <div class="help-block">{{ $errors->first('description') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group {{ $errors->has('cost') ? 'has-error' : '' }}">
-                                <label class="control-label" for="cost">Cost</label>
-                                <input id="cost" type="number" name="cost" class="form-control" placeholder="Title" value="{{ old('cost') }}">
-                                @if ($errors->has('cost'))
-                                    <div class="help-block">{{ $errors->first('cost') }}</div>
-                                @endif
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send</button>
-                        </form>
+                        @include('shared.create_offer_form', ['offer' => $item])
                     @endif
                 @else
                     <h3>Offers ({{ count($item->offers) }})</h3>

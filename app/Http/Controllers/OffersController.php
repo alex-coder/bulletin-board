@@ -13,6 +13,15 @@
 
     class OffersController extends Controller
     {
+        public function index()
+        {
+            $user = Auth::user();
+
+            return view('offers.index', [
+                'offers' => $user->offers,
+            ]);
+        }
+
         public function store(int $bulletin_id, StoreOfferRequest $request)
         {
             /** @var User $user */

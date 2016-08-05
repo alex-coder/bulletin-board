@@ -48,6 +48,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ route('users.bulletins.create') }}"><i class="fa fa-plus"></i> Create bulletin</a></li>
                                 <li><a href="{{ route('users.bulletins.index', Auth::user()) }}"><i class="fa fa-btn fa-list"></i> My bulletins</a></li>
+                                <li><a href="{{ route('users.offers.index') }}"><i class="fa fa-btn fa-list"></i> My offers</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
