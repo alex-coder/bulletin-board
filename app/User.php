@@ -2,6 +2,7 @@
 
     namespace App;
 
+    use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Foundation\Auth\User as Authenticatable;
 
     /**
@@ -32,4 +33,9 @@
             'password',
             'remember_token',
         ];
+
+        public function bulletins() : HasMany
+        {
+            return $this->hasMany(Bulletin::class);
+        }
     }

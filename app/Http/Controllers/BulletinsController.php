@@ -8,14 +8,12 @@
     use Carbon\Carbon;
     use Illuminate\Support\Facades\Auth;
 
-    class BulletinsController extends Controller
+    class BulletinsController extends BaseBulletinController
     {
-        const BULLETINS_PER_PAGE = 20;
-
         public function index()
         {
             return view('bulletins.index', [
-                'list' => Bulletin::active()->paginate(static::BULLETINS_PER_PAGE),
+                'list' => Bulletin::active()->orderBy('created_at', 'desc')->paginate(static::BULLETINS_PER_PAGE),
             ]);
         }
 
@@ -27,14 +25,4 @@
                 'now'  => Carbon::now(),
             ]);
         }
-
-        public function store() { }
-
-        public function create() { }
-
-        public function update() { }
-
-        public function destroy() { }
-
-        public function edit() { }
     }
