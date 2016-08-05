@@ -4,6 +4,7 @@
 
     namespace App;
 
+    use App\Utils\ImagesUtils;
     use Illuminate\Database\Eloquent\Builder;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,11 +22,11 @@
         const STATUS_ACTIVE = 1;
         const STATUS_CLOSED = 0;
 
-        public static function active() : Builder
+        public function scopeActive(Builder $query) : Builder
         {
-            return static::where(['status' => static::STATUS_ACTIVE]);
+            return $query->where(['status' => static::STATUS_ACTIVE]);
         }
-
+        
         public function user() : BelongsTo
         {
             return $this->belongsTo(User::class);
@@ -47,5 +48,23 @@
         public function isActive() : bool
         {
             return $this->status === static::STATUS_ACTIVE;
+        }
+
+        public function isClosed() : bool
+        {
+            return $this->status === static::STATUS_CLOSED;
+        }
+
+        public function getImageUrl() : string
+        {
+            if ($this->image === null) {
+                return '';
+            }
+
+            if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+                return $this->image;
+            }
+
+            return ImagesUtils::buildUrl($this->image);
         }
     }

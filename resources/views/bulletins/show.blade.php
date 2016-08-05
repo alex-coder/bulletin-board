@@ -7,7 +7,7 @@
         <h1>{{ $item->title }}</h1>
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ $item->image }}" alt="{{ $item->title }}" class="img-responsive">
+                <img src="{{ $item->getImageUrl() }}" alt="{{ $item->title }}" class="img-responsive">
             </div>
             <div class="col-md-8">
                 <div class="text-muted">from {{ $item->user->name }}</div>
@@ -50,7 +50,7 @@
                                     <div class="help-block">{{ $errors->first('cost') }}</div>
                                 @endif
                             </div>
-                            <button type="submit" class="btn btn-default">Send</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
                         </form>
                     @endif
                 @else
