@@ -24,7 +24,7 @@
                 Bulletin::create([
                     'title'       => $faker->sentence,
                     'description' => implode(' ', $faker->sentences(10)),
-                    'image'       => $faker->imageUrl(800, 600, 'transport', false) . (($i % 20) + 1),
+                    'image'       => "https://unsplash.it/800/600?image={$i}",
                     'cost'        => $faker->randomFloat(8),
                     'status'      => $faker->boolean ? Bulletin::STATUS_ACTIVE : Bulletin::STATUS_CLOSED,
                     'user_id'     => $users[ array_rand($users->toArray()) ]->id,

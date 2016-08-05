@@ -20,7 +20,7 @@
         <h3>No items here</h3>
     @else
         <div class="row">
-            @each('shared.bulletin_list_item', $list, 'bulletin')
+            @include('shared.bulletin_list', ['list' => $list])
         </div>
         {!! $list->render() !!}
     @endif
