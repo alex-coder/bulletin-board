@@ -4,6 +4,7 @@
 
     namespace App;
 
+    use App\Constants\BulletinsConstants;
     use App\Utils\ImagesUtils;
     use Illuminate\Database\Eloquent\Builder;
     use Illuminate\Database\Eloquent\Model;
@@ -16,17 +17,21 @@
      *
      * @property User    $user
      * @property Offer[] $offers
+     * @property int     $id
+     * @property int     $status
+     * @property string  $image
+     * @property string  $title
+     * @property string  $description
+     * @property float   $cost
+     * @property int     $user_id
      */
     class Bulletin extends Model
     {
-        const STATUS_ACTIVE = 1;
-        const STATUS_CLOSED = 0;
-
         public function scopeActive(Builder $query) : Builder
         {
-            return $query->where(['status' => static::STATUS_ACTIVE]);
+            return $query->where(['status' => BulletinsConstants::STATUS_ACTIVE]);
         }
-        
+
         public function user() : BelongsTo
         {
             return $this->belongsTo(User::class);
@@ -37,22 +42,27 @@
             return $this->hasMany(Offer::class);
         }
 
-        public function isOfferCreated(User $user) : bool
+        public function offerByUser(User $user) : Offer
         {
             return Offer::where([
                 'user_id'     => $user->id,
                 'bulletin_id' => $this->id,
-            ])->count() > 0;
+            ])->first();
+        }
+
+        public function isOfferCreated(User $user) : bool
+        {
+            return count($this->offerByUser($user)) > 0;
         }
 
         public function isActive() : bool
         {
-            return $this->status === static::STATUS_ACTIVE;
+            return $this->status === BulletinsConstants::STATUS_ACTIVE;
         }
 
         public function isClosed() : bool
         {
-            return $this->status === static::STATUS_CLOSED;
+            return $this->status === BulletinsConstants::STATUS_CLOSED;
         }
 
         public function getImageUrl() : string

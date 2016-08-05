@@ -2,6 +2,7 @@
     declare(strict_types = 1);
 
     use App\Bulletin;
+    use App\Constants\OffersConstants;
     use App\Offer;
     use App\User;
     use Faker\Factory;
@@ -26,7 +27,7 @@
                     'title'       => $faker->sentence,
                     'description' => implode(' ', $faker->sentences(10)),
                     'cost'        => $faker->randomFloat(8),
-                    'status'      => $faker->boolean ? Bulletin::STATUS_ACTIVE : Bulletin::STATUS_CLOSED,
+                    'status'      => OffersConstants::STATUS_ACTIVE,
                     'user_id'     => $users[ array_rand($users->toArray()) ]->id,
                     'bulletin_id' => $bulletins[ array_rand($bulletins->toArray()) ]->id,
                 ]);

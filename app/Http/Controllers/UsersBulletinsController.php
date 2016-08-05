@@ -1,8 +1,10 @@
 <?php
+    declare(strict_types = 1);
 
     namespace App\Http\Controllers;
 
     use App\Bulletin;
+    use App\Constants\BulletinsConstants;
     use App\Http\Requests\StoreBulletinRequest;
     use App\User;
     use App\Utils\ImagesUtils;
@@ -32,7 +34,7 @@
             $bulletin->title       = $request->input('title');
             $bulletin->description = $request->input('description');
             $bulletin->cost        = $request->input('cost');
-            $bulletin->status      = Bulletin::STATUS_ACTIVE;
+            $bulletin->status      = BulletinsConstants::STATUS_ACTIVE;
             $bulletin->user_id     = Auth::id();
 
             if ($request->hasFile('image')) {

@@ -1,4 +1,4 @@
-<div class="col-md-12 {{ $offer->isApplied() ? 'bg-success' : '' }}" style="margin-bottom: 20px">
+<div class="col-md-12 {{ $offer->isApplied() ? 'bg-success' : '' }}" style="margin-bottom: 20px" id="offer{{ $offer->id }}">
     <div class="media" style="padding-top: 10px">
         <div class="media-left" style="min-width: 70px">
             <p>{{ $offer->user->name }}</p>
@@ -7,7 +7,7 @@
         <div class="media-body">
             <h4 class="media-heading">{{ $offer->title }}</h4>
             <p>{{ $offer->description }}</p>
-            @if ($offer->bulletin->isActive())
+            @if ($offer->user_id !== Auth::id() && $offer->bulletin->isActive())
                 <a href="{{ route('offers.apply', $offer) }}" class="btn btn-success">Apply</a>
             @endif
         </div>

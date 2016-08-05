@@ -2,9 +2,9 @@
 
     declare(strict_types = 1);
 
-    use App\Offer;
-    use Illuminate\Database\Schema\Blueprint;
+    use App\Constants\OffersConstants;
     use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
 
     class CreateOffers extends Migration
     {
@@ -20,7 +20,7 @@
                 $table->string('title');
                 $table->text('description');
                 $table->decimal('cost')->unsigned();
-                $table->integer('status')->default(Offer::STATUS_ACTIVE);
+                $table->integer('status')->default(OffersConstants::STATUS_ACTIVE);
                 $table->timestamps();
 
                 $table->integer('user_id')->unsigned();

@@ -1,6 +1,10 @@
 <?php
 
+    declare(strict_types = 1);
+
     namespace App\Http\Requests;
+
+    use App\Constants\OffersConstants;
 
     class StoreOfferRequest extends Request
     {
@@ -21,10 +25,6 @@
          */
         public function rules()
         {
-            return [
-                'title'       => 'required|filled|max:255',
-                'description' => 'required|filled',
-                'cost'        => 'required|filled|numeric|min:0',
-            ];
+            return OffersConstants::$validationRules;
         }
     }
