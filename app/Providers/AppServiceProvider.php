@@ -17,7 +17,7 @@
         {
             DB::listen(function ($query) {
                 $bindings = count($query->bindings) ? json_encode($query->bindings) : '';
-                Log::debug("[SQL] [{$query->connectionName}] {$query->sql} {$bindings} {$query->time}ms");
+                Log::debug("[SQL] {$query->sql} {$bindings} {$query->time}ms");
             });
         }
 
