@@ -6,6 +6,7 @@
 
     use App\Utils\ImagesUtils;
     use Illuminate\Database\Eloquent\Builder;
+    use Illuminate\Database\Eloquent\Collection;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
     use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,7 +27,7 @@
         {
             return $query->where(['status' => static::STATUS_ACTIVE]);
         }
-        
+
         public function user() : BelongsTo
         {
             return $this->belongsTo(User::class);
@@ -37,12 +38,17 @@
             return $this->hasMany(Offer::class);
         }
 
-        public function isOfferCreated(User $user) : bool
+        public function offerByUser(User $user) : Offer
         {
             return Offer::where([
                 'user_id'     => $user->id,
                 'bulletin_id' => $this->id,
-            ])->count() > 0;
+            ])->first();
+        }
+
+        public function isOfferCreated(User $user) : bool
+        {
+            return count($this->offerByUser($user)) > 0;
         }
 
         public function isActive() : bool

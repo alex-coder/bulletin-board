@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Create new bulletin</h2>
+    <h2 class="page-header">Create new bulletin</h2>
 
     <form action="{{ route('users.bulletins.store') }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}

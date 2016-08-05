@@ -14,5 +14,6 @@
         Route::resource('users.bulletins', 'UsersBulletinsController', ['only' => ['index']]);
         Route::group(['prefix' => 'users'], function () {
             Route::resource('bulletins', 'UsersBulletinsController', ['except' => ['show', 'index']]);
+            Route::resource('offers', 'OffersController', ['only' => ['index']]);
         });
     });
